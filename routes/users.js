@@ -35,10 +35,11 @@ router.post('/register', (req, res) => {
                                 error: err
                         });
                     } else {
-                        req.session.user_.id = result[0].id;
+                        console.log(result);
+                        req.session.user_id = result.insertId;
                         req.session.username = req.body.name;
                         req.session.email = req.body.email;
-                        res.redirect('/app');
+                        res.redirect('/users/login');
                     }
                 });
             });
