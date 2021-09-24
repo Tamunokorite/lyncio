@@ -35,7 +35,7 @@ router.post('/register', (req, res) => {
                                 error: err
                         });
                     } else {
-                        req.session.id = result[0].id;
+                        req.session.user_.id = result[0].id;
                         req.session.username = req.body.name;
                         req.session.email = req.body.email;
                         res.redirect('/app');
