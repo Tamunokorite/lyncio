@@ -40,7 +40,6 @@ router.post('/register', (req, res) => {
                         req.session.user_id = result.insertId;
                         req.session.username = req.body.name;
                         req.session.email = req.body.email;
-                        conn.end();
                         res.redirect('/users/login');
                     }
                 });
@@ -74,13 +73,11 @@ router.post('/login', (req, res) => {
                     req.session.username = result[0].name;
                     req.session.email = result[0].email;
                     res.redirect('/app');
-                    conn.end();
                 } else {
                     res.render('login', {
                         title: 'Login',
                         error: 'Incorrect Password'
                     });
-                    conn.end();
                 }
             });
         }
@@ -91,7 +88,7 @@ router.post('/logout', (req, res) => {
     req.session.destroy(function(err) {
         // cannot access session here
         if (err) throw err;
-        res.redirect('/');
+        res.redirect('/')
     })
 });
 

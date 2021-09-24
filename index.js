@@ -49,7 +49,6 @@ app.get('/:slug', (req, res) => {
     conn.query(sql, [req.params.slug], (err, result) => {
         if (err) throw err;
         if (result.length) {
-            conn.end();
             res.redirect(result[0].long_url);
         }
     })
