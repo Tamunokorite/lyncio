@@ -1,0 +1,29 @@
+<h1 class="text-center mt-3 mb-2">Register</h1>
+<form action="/users/register" method="post">
+<div class="form-group">
+    <label for="name" class="sr-only">Name:</label>
+    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+</div>
+<div class="form-group">
+    <label for="email" class="sr-only">Email:</label>
+    <input type="email" class="form-control" id="email" name="email" placeholder="Email">
+</div>
+<div class="form-group">
+    <label for="password" class="sr-only">Enter Password:</label>
+    <input type="password" class="form-control" id="password" name="password" placeholder="Enter Password">
+</div>
+<div class="form-group">
+    <label for="cpassword" class="sr-only">Confirm Password:</label>
+    <input type="password" class="form-control" id="cpassword" name="cpassword" placeholder="Confirm Password">
+</div>
+{{#if error}}
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+  <strong>{{error}}</strong> Try again.
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+{{/if}}
+<button type="submit" class="btn btn-primary btn-lg btn-block">Register</button>
+</form>
+<p>Already have an account? <a href="/users/login">Login</a></p>
