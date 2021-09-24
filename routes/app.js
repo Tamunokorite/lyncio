@@ -5,17 +5,20 @@ const mysql = require('mysql2');
 
 require('dotenv').config();
 
-conn = mysql.createConnection({
-   host: process.env.DB_HOST_,
-   user:  process.env.DB_USER_,
-   password: process.env.DB_PASS_,
-   database: process.env.DB_NAME_
-});
-
-conn.connect((err) => {
-    if (err) throw err;
-    console.log('Connected');
-});
+conn = mysql.createPool({
+    host: process.env.DB_HOST_,
+    user:  process.env.DB_USER_,
+    password: process.env.DB_PASS_,
+    database: process.env.DB_NAME_,
+    waitForConnections: true,
+     connectionLimit: 10,
+     queueLimit: 0
+ });
+ 
+ // conn.connect((err) => {
+ //     if (err) throw err;
+ //     console.log('Connected');
+ // });
 
 router.get('/', (req, res) => {
     if (req.session.email) {
