@@ -32,8 +32,9 @@ router.post('/register', (req, res) => {
                     if (err) {
                         res.render('register', {
                                 title: 'Register',
-                                error: err
+                                error: 'Unable to register user.'
                         });
+                        throw err;
                     } else {
                         console.log(result);
                         req.session.user_id = result.insertId;
