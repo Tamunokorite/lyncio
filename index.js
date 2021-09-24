@@ -44,11 +44,16 @@ app.get('/', (req, res) => res.render('index', {
     session: req.session
 }));
 
-app.get('/s/:slug', (req, res) => {
+app.get('/short/:slug', (req, res) => {
     sql = 'SELECT * FROM urls WHERE back_half = ?';
     conn.query(sql, [req.params.slug], (err, result) => {
         if (err) throw err;
-        res.redirect(result[0].long_url);
+        if (result.length) {
+            res.redirect(result[0].long_url);
+        } else {
+            const newUrl = `/${req.params.slug}`;
+            res.redirect(newUrl)
+        }
     })
 });
 
