@@ -29,6 +29,7 @@ router.get('/', (req, res) => {
                 urls: result,
                 base: process.env.BASE_URL
             });
+            conn.end();
         }); 
     } else {
         res.render('index', {
@@ -47,6 +48,7 @@ router.post('/create', (req, res) => {
                     session: req.session,
                     error: 'The back half you entered is already taken, Please try again.'
                 });
+                conn.end();
             } else {
                 sql = "INSERT INTO urls (title, back_half, long_url, user_id) VALUES (?, ?, ?, ?)";
                 conn.query(sql, [req.body.title, req.body.backhalf, req.body.longurl, req.session.user_id], (err, result) => {
@@ -57,6 +59,7 @@ router.post('/create', (req, res) => {
                             error: 'Unable to create URL.'
                         });
                         // throw err;
+                        conn.end();
                     } else {
                         sql = 'SELECT * FROM urls WHERE user_id = ?';
                         conn.query(sql, [req.session.user_id], (err, result) => {
@@ -68,6 +71,7 @@ router.post('/create', (req, res) => {
                                 urls: result,
                                 base: process.env.BASE_URL
                             });
+                            conn.end();
                         }); 
                     }
                 })
@@ -79,6 +83,7 @@ router.post('/create', (req, res) => {
                     session: req.session,
                     error: 'Long URL and Back half fields are required.'
                 });
+                conn.end();
             }
 });
 
