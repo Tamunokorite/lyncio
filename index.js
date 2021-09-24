@@ -44,7 +44,7 @@ app.get('/', (req, res) => res.render('index', {
     session: req.session
 }));
 
-app.get('/:slug', (req, res) => {
+app.get('/s/:slug', (req, res) => {
     sql = 'SELECT * FROM urls WHERE back_half = ?';
     conn.query(sql, [req.params.slug], (err, result) => {
         if (err) throw err;
