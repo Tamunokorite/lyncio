@@ -50,9 +50,6 @@ app.get('/short/:slug', (req, res) => {
         if (err) throw err;
         if (result.length) {
             res.redirect(result[0].long_url);
-        } else {
-            const newUrl = `/${req.params.slug}`;
-            res.redirect(newUrl)
         }
     })
 });
